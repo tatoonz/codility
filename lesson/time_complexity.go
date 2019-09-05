@@ -26,32 +26,22 @@ func PermMissingElem(A []int) int {
 
 // TapeEquilibrium minimize the value |(A[0] + ... + A[P-1]) - (A[P] + ... + A[N-1])|.
 func TapeEquilibrium(A []int) int {
-	s := prefixSum(A)
+	total := 0
+	for i := range A {
+		total += A[i]
+	}
 
 	result := math.MaxFloat64
+	left := 0
 	for p := 1; p < len(A); p++ {
-		diff := math.Abs(float64(s[p-1] - sum(s, p, len(A))))
+		left += A[p-1]
+		right := total - left
 
+		diff := math.Abs(float64(left - right))
 		if diff < result {
 			result = diff
 		}
 	}
 
 	return int(result)
-}
-
-func prefixSum(A []int) []int {
-	result := make([]int, len(A))
-
-	total := 0
-	for i, n := range A {
-		total += n
-		result[i] = total
-	}
-
-	return result
-}
-
-func sum(s []int, from, to int) int {
-	return s[to-1] - s[from-1]
 }
