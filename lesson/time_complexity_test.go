@@ -18,3 +18,7 @@ func TestPermMissingElem(t *testing.T) {
 	assert.Equal(t, 1, lesson.PermMissingElem([]int{}))
 	assert.Equal(t, 2, lesson.PermMissingElem([]int{1}))
 }
+
+func TestTapeEquilibrium(t *testing.T) {
+	assert.Equal(t, 1, lesson.TapeEquilibrium([]int{3, 1, 2, 4, 3}))
+}
